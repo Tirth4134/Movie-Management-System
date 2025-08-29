@@ -1,0 +1,101 @@
+<div class=" mt-4 edit-form">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Add MovieData</h4>
+    </div>
+    <div class="card-body w-100">
+      <form [formGroup]="CreateForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3 ">
+          <p-floatLabel variant="on" class="">
+            <input pInputText id="title" type="text" formControlName="title" autocomplete="off" required minlength="4"
+              pattern="^[a-zA-Z\s\'\-\:]{0,60}$"
+              class="text-dark"
+              />
+
+
+            <label for="title">Title</label>
+          </p-floatLabel>
+        
+            <div class="text-danger">{{ formErrors.title }}</div>
+
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel variant="on">
+
+
+            <p-multiSelect id="genre" formControlName="genre" [options]="genres" optionLabel="label" optionValue="value"
+              display="chip" [maxSelectedLabels]="6" required class="w-full rounded-3" />
+
+            <label for="genre">Genre</label>
+          </p-floatLabel>
+       
+            <div class="text-danger">{{ formErrors.genre }}</div>
+
+        </div>
+
+
+        <div class="mb-3">
+          <p-floatLabel variant="on">
+            <p-datepicker formControlName="releasedYear" id="releasedYear" [maxDate]="maxDate" view="year"
+              dateFormat="yy" required class="w-full text-dark rounded-3" [iconDisplay]="'input'" [showIcon]="true"
+              inputId="icondisplay" />
+
+            <label for="releasedYear">Released Year</label>
+          </p-floatLabel>
+         
+            <div class="text-danger">{{ formErrors.releasedYear }}</div>
+
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel variant="on">
+
+            <p-inputNumber formControlName="rating" [showButtons]="true" inputId="minmax-buttons" mode="decimal"
+              [minFractionDigits]="1" [maxFractionDigits]="1" [step]="0.1" [min]="0.1" [max]="10.0"
+              class="w-full  text-dark" pattern="^\d+(\.\d+)?$" required></p-inputNumber>
+
+            <label class="form-label">Rating</label>
+          </p-floatLabel>
+       
+          <div class="text-danger">{{ formErrors.rating }}</div>
+          
+        </div>
+
+
+        <div class="mb-2">
+          <label class="form-label">Description</label>
+          <textarea pTextarea formControlName="description" id="description" rows="4" cols="30" style="resize: none"
+            class="w-full rounded-3 px-2" required maxlength="250"></textarea>
+        
+         
+          <div class="text-danger">{{ formErrors.description }}</div>
+
+          <div class="line text-end mt-0 fw-normal text-muted  fst-normal" *ngIf="description?.valid">only 250
+            characters are required....</div>
+
+
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Image</label>
+          <input type="file" id="image" class="form-control" (change)="onFileChange($event)" accept="image/*"
+            required />
+         
+          <div class="text-danger">{{ formErrors.image }}</div>
+
+        </div>
+
+
+        <div class="text-end">
+          <button type="submit" class="btn btn-success px-4">
+            Submit
+          </button>
+          <button type="button" class="btn btn-primary mx-2" (click)="goBack()">
+            Go Back
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

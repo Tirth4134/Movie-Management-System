@@ -1,0 +1,90 @@
+
+
+<div class="home-container">
+  <div class="overlay"></div>
+
+ 
+  <div class="navbar">
+    <h1 class="logo">NETFLIX</h1>
+    <div class="right-menu">
+      <select class="lang-select">
+        <option>English</option>
+        <option>Hindi</option>
+      </select>
+      <button class="sign-in-btn" routerLink="/login">Sign In</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Unlimited movies, TV shows and more</h1>
+    <p>Starts at ₹149. Cancel at any time.</p>
+    <p class="mt-4">Ready to watch? Enter your email to create or restart your membership.</p>
+
+    <form (ngSubmit)="register()"  class="email-form">
+      <p-floatlabel variant="in" class="input-wrapper">
+        <input
+          pInputText
+          id="email"
+          [(ngModel)]="Emailid"
+          name="email"
+          #emailref="ngModel"
+          type="email"
+          autocomplete="off"
+          class="w-full"
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          required
+        />
+        <label for="email">Email</label>
+
+        @if (emailref.dirty || emailref.touched) {
+          <div [hidden]="emailref.valid" class="text-danger">
+            @if (emailref.hasError('required')) {
+              <div>
+              Email is required
+              </div>
+            }
+            @else if (emailref.hasError('pattern')) {
+              <div>
+              Please enter a valid email address.
+              </div>
+            }
+          </div>
+        }
+      </p-floatlabel>
+
+     
+      <p-floatlabel variant="in" class="input-wrapper">
+        <input
+          pInputText
+          id="password"
+          [(ngModel)]="Password"
+          name="password"
+          #passwordref="ngModel"
+          type="password"
+          autocomplete="off"
+          class="w-full"
+          required
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+])[A-Za-z0-9!@#$%^&*()_+]{8,}$"
+        />
+        <label for="password">Password</label>
+        @if (passwordref.dirty || passwordref.touched) {
+          <div [hidden]="passwordref.valid" class="text-danger">
+            @if (passwordref.hasError('required')) {
+              <div>
+              Password is required
+              </div>
+            }
+            @else if (passwordref.hasError('pattern')) {
+              <div>
+              Password must be strong!!!
+             </div>
+            }
+          </div>
+        }
+      </p-floatlabel>
+
+      <button type="submit" [disabled]="!emailref.valid || !passwordref.valid">Get Started ›</button>
+    </form>
+  </div>
+</div>
+
